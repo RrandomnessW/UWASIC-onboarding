@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-Explain how your project works
+This project will control a PWM_Module using a SPI protocol
 
 ## How to test
 
-Explain how to use your project
+There will be a file that is used as a test bench. It will test different scenarios of inputs including edge cases (lowest speed, highest speed, middle speed) type thing.
 
 ## External hardware
 
-List external hardware used in your project (e.g. PMOD, LED display, etc), if any
+External hardware includes: my hp laptop with an intel chip and a laptop that dies really fast if it is not plugged in.
