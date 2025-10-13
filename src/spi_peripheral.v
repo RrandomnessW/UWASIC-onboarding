@@ -7,8 +7,8 @@ module spi_peripheral #(
     parameter pwm_15_8 = 0x03,
     parameter duty_cycle = 0x04,
 ) (
-    input wire clk, //remove if unused
-    input wire rst_n, //remove if unused
+    input wire clk,
+    input wire rst_n,
     input wire sclk,
     input wire cs_n, // deasserted when transaction finishes
     input reg copi,
@@ -31,10 +31,6 @@ reg [2:0] sync_chain_sclk;  /* sync_chain_sclk: 3 bits, N = 3, N+1 samples store
 reg cdc_copi_bit;   /*  cdc_copi_bit - copi bit value after CDC*/ 
 reg cdc_nCS;        /*  cdc_nCS - cs_n value after CDC*/ 
 reg cdc_sclk;       /*  cdc_sclk - sclk value after CDC*/
-
-// reg sync_chain_sclk_done;   /* sclk status to show sync_chain is finished*/
-// reg sync_chain_copi_done;   /* copi status to show sync_chain is finished*/
-// reg sync_chain_nCS_done;    /* nCS status to show sync_chain is finished*/
 
 /* SPI mode 0: data is sampled on rising SCLK edge, data is ready on falling SCLK edge*/
 /*  cdc_copi - register used to process SPI message after clock domain crossing (CDC)
@@ -64,9 +60,6 @@ always @(posedge clk) begin
         sync_chain_sclk <= 0;
         sync_chain_copi <= 0;
         sync_chain_nCS <= 0;
-        // sync_chain_sclk_done <= 0;
-        // sync_chain_copi_done <= 0;
-        // sync_chain_nCS_done <= 0;
         cdc_copi_bit <= 0;
         cdc_sclk <= 0;
         cdc_nCS <= 0;
@@ -140,6 +133,6 @@ always @(posedge clk) begin
     end
 end
 
-wire _unused = &{sync_chain_sclk_done, sync_chain_nCS_done};
+wire _unused = &{};
 
 end module
