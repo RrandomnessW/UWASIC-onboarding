@@ -1,11 +1,11 @@
 module spi_peripheral #(
     // what constants do I use?
     parameter write = 1,
-    parameter out_7_0 = 0x00,
-    parameter out_15_8 = 0x01,
-    parameter pwm_7_0 = 0x02,
-    parameter pwm_15_8 = 0x03,
-    parameter duty_cycle = 0x04,
+    parameter out_7_0 = 1'h0,       //0x0
+    parameter out_15_8 = 1'h1,      //0x1
+    parameter pwm_7_0 = 1'h2,       //0x2
+    parameter pwm_15_8 = 1'h3,      //0x3
+    parameter duty_cycle = 1'h4     //0x4
 ) (
     input wire clk,
     input wire rst_n,
@@ -52,11 +52,11 @@ reg [4:0] sclk_cnt; /* To ensure exactly 16 bits are captured. 5 bits total inca
 always @(posedge clk) begin
     if (!rst_n) begin
         //reset all outputs
-        en_reg_out_7_0 <= 0x00;
-        en_reg_out_15_8 <= 0x00;
-        en_reg_pwm_7_0 <= 0x00;
-        en_reg_pwm_15_8 <= 0x00;
-        pwm_duty_cycle <= 0x00;
+        en_reg_out_7_0 <= 0;
+        en_reg_out_15_8 <= 0;
+        en_reg_pwm_7_0 <= 0;
+        en_reg_pwm_15_8 <= 0;
+        pwm_duty_cycle <= 0;
         sync_chain_sclk <= 0;
         sync_chain_copi <= 0;
         sync_chain_nCS <= 0;
