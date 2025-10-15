@@ -1,11 +1,11 @@
 module spi_peripheral #(
     // what constants do I use?
     parameter write = 1,
-    parameter out_7_0 = 1'h0,       //0x0
-    parameter out_15_8 = 1'h1,      //0x1
-    parameter pwm_7_0 = 1'h2,       //0x2
-    parameter pwm_15_8 = 1'h3,      //0x3
-    parameter duty_cycle = 1'h4     //0x4
+    parameter out_7_0 = 4'h0,       //0x0
+    parameter out_15_8 = 4'h1,      //0x1
+    parameter pwm_7_0 = 4'h2,       //0x2
+    parameter pwm_15_8 = 4'h3,      //0x3
+    parameter duty_cycle = 4'h4     //0x4
 ) (
     input wire clk,
     input wire rst_n,
@@ -79,7 +79,7 @@ always @(posedge clk) begin
         cdc_nCS <= sync_chain_nCS[1];
 
         // Sampling copi bit
-        sync_chain_copi <= (sync_chin_copi << 1) | copi;
+        sync_chain_copi <= (sync_chain_copi << 1) | copi;
         cdc_copi_bit <= sync_chain_copi[1];
 
         // Sample copi_bit when chip select is set low
@@ -106,7 +106,7 @@ always @(posedge clk) begin
             
             // Transaction has finished since cs_n is deasserted. Update register outputs now. 
 
-            if (sclk_cnt == 16 and copi_data[15] == write) begin
+            if (sclk_cnt == 16 && copi_data[15] == write) begin
 
                 // only update output registers if COPI is a write
 
@@ -133,6 +133,4 @@ always @(posedge clk) begin
     end
 end
 
-wire _unused = &{};
-
-end module
+endmodule
